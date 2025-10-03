@@ -102,8 +102,9 @@ class SelectClauseBuilder(object):
         :param path_builder:
         :rtype: SelectClauseBuilder
         """
-        self._relationship_graph.add_path(path_builder.path)
-        return copy(self)
+        new_builder = copy(self)
+        new_builder._relationship_graph.add_path(path_builder.path)
+        return new_builder
 
     def where(self, expression):
         """
@@ -112,8 +113,9 @@ class SelectClauseBuilder(object):
         :param expression:
         :rtype: SelectClauseBuilder
         """
-        self._filters.append(expression)
-        return copy(self)
+        new_builder = copy(self)
+        new_builder._filters.append(expression)
+        return new_builder
 
     def order_by(self, column, direction=None, nulls_position=None):
         """
@@ -130,9 +132,9 @@ class SelectClauseBuilder(object):
             direction=direction,
             nulls_position=nulls_position
         )
-        self._order_bys.append(clause)
-
-        return copy(self)
+        new_builder = copy(self)
+        new_builder._order_bys.append(clause)
+        return new_builder
 
     def limit(self, limit):
         """
@@ -141,8 +143,9 @@ class SelectClauseBuilder(object):
         :param limit:
         :rtype: SelectClauseBuilder
         """
-        self._limit = limit
-        return copy(self)
+        new_builder = copy(self)
+        new_builder._limit = limit
+        return new_builder
 
     def offset(self, offset):
         """
@@ -151,8 +154,9 @@ class SelectClauseBuilder(object):
         :param offset:
         :rtype: SelectClauseBuilder
         """
-        self._offset = offset
-        return copy(self)
+        new_builder = copy(self)
+        new_builder._offset = offset
+        return new_builder
 
     def count(self):
         """
@@ -160,8 +164,9 @@ class SelectClauseBuilder(object):
 
         :rtype: SelectClauseBuilder
         """
-        self._count = True
-        return copy(self)
+        new_builder = copy(self)
+        new_builder._count = True
+        return new_builder
 
     def columns(self, *columns):
         """
@@ -170,8 +175,9 @@ class SelectClauseBuilder(object):
         :param columns:
         :rtype: SelectClauseBuilder
         """
-        self._columns = list(columns)
-        return copy(self)
+        new_builder = copy(self)
+        new_builder._columns = list(columns)
+        return new_builder
 
     def subquery(self):
         """
